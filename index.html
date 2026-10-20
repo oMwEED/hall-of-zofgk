@@ -1,0 +1,1020 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <meta name="theme-color" content="#080808">
+  <meta name="description" content="ZOFGK — LEGACY OF FIVE：從低谷到巔峰，一段屬於五人的王朝故事。非官方 T1 電競歷史敘事網站。">
+  <title>ZOFGK — LEGACY OF FIVE</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%23080808'/%3E%3Cpath d='M12 18h40L16 46h36' fill='none' stroke='%23c6a667' stroke-width='5'/%3E%3C/svg%3E">
+  <style>
+    :root {
+      --bg: #080808; --surface: #141414; --surface-raised: #1e1b17;
+      --gold: #c6a667; --gold-light: #e0cc98; --ivory: #f2ede2;
+      --muted: #a69d8d; --t1-red: #9e1b32; --line: rgba(198, 166, 103, .28);
+      --metal-brush: repeating-linear-gradient(0deg, rgba(255, 248, 225, .018) 0 1px, transparent 1px 3px);
+      --metal-gold: linear-gradient(175deg, #f4ead4 0%, #c6b28c 34%, #a89473 48%, #ede0c1 54%, #d1bf9b 72%, #b7a078 100%);
+      --metal-ivory: linear-gradient(178deg, #fff9e9 0%, #ded4bc 29%, #fffbed 44%, #b2a38a 49%, #e8ddc4 56%, #fff9e9 72%, #c3b18c 100%);
+      --metal-panel: linear-gradient(135deg, #34302a 0%, #191713 32%, #29251e 54%, #13120f 100%);
+      --header-height: 80px; --gutter: clamp(24px, 5vw, 80px);
+      --serif: Georgia, 'Times New Roman', serif;
+      --sans: 'Segoe UI', 'PingFang TC', 'Microsoft JhengHei', sans-serif;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; scrollbar-gutter: stable; }
+    body { margin: 0; background: var(--bg); color: var(--ivory); font-family: var(--sans); line-height: 1.8; }
+    a { color: inherit; text-decoration: none; }
+    a:focus-visible, button:focus-visible { outline: 2px solid var(--gold-light); outline-offset: 6px; }
+    button { font: inherit; color: inherit; cursor: pointer; touch-action: manipulation; }
+    [hidden] { display: none !important; }
+    body.dialog-open { overflow: hidden; }
+    ::selection { color: var(--bg); background: var(--gold-light); }
+    h1, h2, h3, p { margin: 0; }
+    h1, h2, h3 { font-weight: 400; line-height: 1.1; }
+    svg { display: block; max-width: 100%; }
+    section, article { scroll-margin-top: calc(var(--header-height) + 24px); }
+    .wrap { width: min(100%, 1480px); padding-inline: var(--gutter); margin-inline: auto; }
+    .eyebrow { color: var(--gold); font-size: 11px; font-weight: 600; letter-spacing: .22em; line-height: 1.8; }
+    .serif { font-family: var(--serif); }
+    .muted { color: var(--muted); }
+    .skip-link { position: fixed; top: 12px; left: 16px; z-index: 100; padding: 8px 20px; background: var(--gold-light); color: var(--bg); transform: translateY(-180%); }
+    .skip-link:focus { transform: translateY(0); }
+    .site-header { position: sticky; top: 0; z-index: 20; border-bottom: 1px solid var(--line); background: linear-gradient(180deg, #171613, #0b0b0a 55%, #080808); box-shadow: inset 0 1px rgba(255, 244, 214, .04), 0 1px 0 rgba(0, 0, 0, .8); }
+    .header-inner { min-height: calc(var(--header-height) - 1px); display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+    .brand { display: flex; align-items: center; gap: 12px; flex-shrink: 0; }
+    .brand-mark { width: 30px; height: 30px; color: var(--gold); }
+    .brand-name { display: block; font-size: 19px; font-family: var(--serif); letter-spacing: .12em; line-height: 1.3; }
+    .brand-sub { display: block; font-size: 8px; letter-spacing: .2em; color: var(--gold); }
+    .primary-nav { display: flex; align-items: center; gap: clamp(20px, 3vw, 44px); }
+    .primary-nav a { display: flex; align-items: center; justify-content: center; min-width: 44px; min-height: 44px; color: var(--muted); font-size: 11px; font-weight: 600; letter-spacing: .14em; transition: color .2s; }
+    .primary-nav a:hover { color: var(--gold-light); }
+    .hero { position: relative; isolation: isolate; min-height: max(760px, calc(100svh - var(--header-height))); display: grid; align-content: center; overflow: clip; }
+    .hero::before { content: ''; position: absolute; z-index: -2; inset: 0; background: radial-gradient(ellipse at 12% 28%, rgba(192, 169, 125, .24), transparent 45%), radial-gradient(ellipse at 91% 42%, rgba(154, 132, 94, .2), transparent 42%), radial-gradient(ellipse at 50% 0%, rgba(224, 204, 152, .12), transparent 48%), radial-gradient(ellipse at 50% 100%, rgba(158, 27, 50, .08), transparent 50%); }
+    .hero::after { content: ''; position: absolute; z-index: -1; inset: 0; background: linear-gradient(105deg, transparent 8%, rgba(8, 8, 8, .65) 38%, transparent 60%), linear-gradient(180deg, transparent 45%, var(--bg) 100%); pointer-events: none; }
+    .hero-grid { display: grid; grid-template-columns: 1fr; align-items: center; padding-block: 140px 120px; }
+    .hero-copy { position: relative; z-index: 1; text-align: center; }
+    .hero-kicker { display: flex; gap: 20px; justify-content: center; align-items: center; margin-bottom: 40px; font-size: 10px; letter-spacing: .3em; }
+    .hero-kicker::before, .hero-kicker::after { content: ''; width: 40px; height: 1px; background: var(--line); }
+    .hero h1 { width: min(100%, 1120px); margin-inline: auto; line-height: 1; }
+    .hero-title-art { width: 100%; height: auto; aspect-ratio: 1240 / 400; }
+    .visually-hidden { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; border: 0; }
+    .hero-subtitle { margin-top: 4px; padding-left: .48em; font-family: var(--serif); color: var(--gold-light); font-size: clamp(18px, 2vw, 28px); letter-spacing: .48em; }
+    .hero-description { max-width: 480px; margin: 32px auto 0; color: #c1b7a5; font-size: 16px; letter-spacing: .08em; }
+    .explore { position: relative; display: inline-flex; gap: 32px; justify-content: space-between; align-items: center; min-height: 58px; padding: 12px 28px; margin-top: 36px; border: 1px solid var(--gold); background: var(--metal-brush), var(--metal-panel); box-shadow: inset 0 1px rgba(255, 244, 214, .2), inset 0 -2px rgba(0, 0, 0, .7), 0 8px 20px rgba(0, 0, 0, .4); font-size: 10px; font-weight: 600; letter-spacing: .2em; transition: color .25s, box-shadow .25s, transform .25s; }
+    .explore::before { content: ''; position: absolute; inset: 3px; border: 1px solid rgba(224, 204, 152, .12); pointer-events: none; }
+    .explore:hover { color: var(--gold-light); box-shadow: inset 0 1px rgba(255, 244, 214, .4), inset 0 -2px rgba(0, 0, 0, .7), 0 8px 24px rgba(0, 0, 0, .5), 0 0 20px rgba(198, 166, 103, .1); transform: translateY(-2px); }
+    .explore:active { transform: translateY(0); box-shadow: inset 0 2px 8px rgba(0, 0, 0, .7); }
+    .explore span { font-size: 18px; line-height: 1; }
+    .hero-art { position: absolute; z-index: -1; width: 104px; left: 50%; top: 24px; transform: translateX(-50%); pointer-events: none; }
+    .hero-art::before { content: ''; position: absolute; inset: 15%; border-radius: 50%; background: radial-gradient(ellipse, rgba(198, 166, 103, .06), transparent 65%); }
+    .hero-art svg { width: 100%; height: auto; }
+    .hero-annotation { position: absolute; top: 60px; color: var(--muted); font-size: 9px; letter-spacing: .18em; line-height: 2; }
+    .hero-annotation-left { left: var(--gutter); }
+    .hero-annotation-right { right: var(--gutter); text-align: right; }
+    .hero-annotation span { display: block; color: var(--gold); }
+    .hero-foot { position: absolute; bottom: 40px; left: var(--gutter); right: var(--gutter); display: flex; justify-content: space-between; align-items: center; gap: 16px; font-size: 9px; letter-spacing: .2em; color: var(--muted); }
+    .hero-foot a { display: flex; min-height: 44px; align-items: center; gap: 16px; color: var(--gold); }
+    .hero-foot a::before { content: ''; height: 32px; width: 1px; background: var(--gold); }
+    .section { position: relative; padding-block: clamp(88px, 11vw, 160px); border-top: 1px solid var(--line); }
+    .section-heading { display: grid; grid-template-columns: 1fr 1fr; align-items: end; gap: 40px; margin-bottom: 56px; }
+    .section-title { margin-top: 20px; font-family: 'Impact', 'Arial Narrow', var(--sans); font-size: clamp(52px, 7.5vw, 112px); letter-spacing: .015em; line-height: 1.04; }
+    .section-intro { max-width: 360px; color: var(--muted); font-size: 16px; justify-self: end; line-height: 2.1; }
+    .player-wall { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 12px; align-items: start; padding-block: 12px 40px; }
+    .player-card { min-width: 0; min-height: 384px; padding: 24px 20px; display: flex; flex-direction: column; text-align: left; border: 1px solid var(--line); background: var(--metal-brush), linear-gradient(160deg, var(--surface-raised), var(--bg) 65%); box-shadow: inset 0 1px rgba(224, 204, 152, .1); transition: transform .25s, border-color .25s, background-color .25s; }
+    .player-card:nth-child(1), .player-card:nth-child(5) { margin-top: 32px; }
+    .player-card:nth-child(2), .player-card:nth-child(4) { margin-top: 16px; }
+    .player-card:nth-child(3) { border-color: var(--gold); }
+    .player-card:hover { border-color: var(--gold-light); transform: translateY(-6px); }
+    .player-card:active { transform: translateY(-2px); }
+    .player-top { display: flex; justify-content: space-between; gap: 8px; font-size: 10px; letter-spacing: .12em; color: var(--gold-light); }
+    .player-number { color: var(--muted); font-family: var(--serif); }
+    .player-mark { position: relative; display: grid; place-items: center; flex: 1; min-height: 220px; isolation: isolate; }
+    .player-mark::before { content: ''; position: absolute; z-index: -1; width: 76%; aspect-ratio: 1; max-width: 148px; border: 1px solid var(--line); transform: rotate(45deg) scale(.8); }
+    .player-mark::after { content: ''; position: absolute; z-index: -1; width: 1px; height: 90%; background: linear-gradient(transparent, var(--gold), transparent); opacity: .45; }
+    .player-monogram { font-family: var(--serif); font-size: clamp(80px, 8vw, 128px); line-height: 1; color: var(--gold-light); text-shadow: 0 3px #493a24; }
+    .player-name { display: block; font-family: 'Impact', 'Arial Narrow', var(--sans); font-size: clamp(24px, 2.4vw, 36px); line-height: 1.4; overflow-wrap: anywhere; }
+    .player-hint { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-top: 16px; padding-top: 16px; border-top: 1px solid var(--line); font-size: 12px; color: var(--muted); }
+    .player-hint span { color: var(--gold-light); }
+    .player-note { color: var(--muted); font-size: 12px; letter-spacing: .05em; }
+    .player-dialog { width: min(840px, calc(100% - 32px)); max-width: none; max-height: calc(100vh - 32px); max-height: calc(100dvh - 32px); margin: auto; padding: 0; overflow: auto; overscroll-behavior: contain; scroll-padding-block: 88px 24px; border: 1px solid var(--gold); background: var(--surface); color: var(--ivory); box-shadow: 0 24px 80px rgba(0, 0, 0, .7); }
+    .player-dialog::backdrop { background: rgba(0, 0, 0, .85); }
+    .dialog-header { position: sticky; top: 0; z-index: 2; display: flex; justify-content: space-between; align-items: center; gap: 16px; padding: 12px 24px; border-bottom: 1px solid var(--line); background: var(--surface); }
+    .dialog-close { min-width: 80px; min-height: 44px; padding: 8px 12px; border: 1px solid var(--line); background: var(--surface-raised); font-size: 12px; }
+    .dialog-close:hover, .dialog-return:hover { color: var(--gold-light); border-color: var(--gold-light); }
+    .dialog-header button:focus-visible { outline-offset: 3px; }
+    .dialog-inner { display: grid; grid-template-columns: 160px minmax(0, 1fr); gap: 40px; padding: 40px; }
+    .dialog-emblem { align-self: start; border-block: 1px solid var(--line); text-align: center; padding-block: 32px; color: var(--gold-light); }
+    .dialog-monogram { display: block; font-family: var(--serif); font-size: 112px; line-height: 1.2; }
+    .dialog-emblem small { color: var(--muted); font-size: 10px; letter-spacing: .18em; }
+    .dialog-name { margin-top: 12px; font-family: 'Impact', 'Arial Narrow', var(--sans); font-size: clamp(40px, 6vw, 64px); overflow-wrap: anywhere; }
+    .dialog-bio { margin-top: 24px; color: var(--ivory); font-size: 16px; line-height: 2; }
+    .dialog-tags { display: flex; flex-wrap: wrap; gap: 8px; padding: 0; margin: 24px 0 32px; list-style: none; }
+    .dialog-tags li { padding: 4px 12px; border: 1px solid var(--line); font-size: 12px; color: var(--gold-light); }
+    .dialog-moment { padding-top: 24px; border-top: 1px solid var(--line); }
+    .dialog-moment h3 { margin-top: 12px; font-size: 22px; line-height: 1.5; }
+    .dialog-moment p { margin-top: 12px; color: var(--muted); font-size: 16px; line-height: 1.9; }
+    .dialog-source { display: inline-flex; align-items: center; min-height: 44px; margin-top: 12px; color: var(--gold-light); font-size: 12px; text-decoration: underline; text-underline-offset: 5px; }
+    .dialog-source[hidden] { display: none; }
+    .dialog-return { min-height: 48px; width: 100%; margin-top: 32px; padding: 12px 20px; border: 1px solid var(--gold); background: var(--metal-brush), var(--metal-panel); font-size: 14px; }
+    .footer-source a { display: block; min-height: 32px; padding-block: 4px; text-decoration: underline; text-underline-offset: 4px; }
+    .chapter-rail { border-block: 1px solid var(--line); padding-block: 20px; display: flex; align-items: center; gap: 24px; }
+    .chapter-rail > span { margin-right: auto; font-size: 10px; letter-spacing: .15em; color: var(--muted); }
+    .chapter-rail a { display: grid; place-items: center; min-width: 44px; min-height: 44px; font-family: var(--serif); font-size: 18px; color: var(--gold-light); transition: background .2s; }
+    .chapter-rail a:hover { background: var(--surface-raised); }
+    .chapter-rail { position: sticky; top: var(--header-height); z-index: 10; background: rgba(8, 8, 8, .97); }
+    .chapter-rail a[aria-current="location"] { color: var(--ivory); box-shadow: inset 0 -2px var(--gold); }
+    .journey-progress { display: grid; grid-template-columns: 1fr auto; gap: 12px 24px; align-items: center; padding-block: 24px; }
+    .journey-progress p { color: var(--muted); font-size: 14px; }
+    .journey-progress progress { width: 100%; height: 4px; accent-color: var(--gold); grid-column: 1 / -1; }
+    .journey-progress progress::-webkit-progress-bar { background: var(--surface-raised); }
+    .journey-progress progress::-webkit-progress-value { background: var(--gold); }
+    .reset-reading { min-height: 44px; padding: 8px 16px; border: 1px solid var(--line); background: var(--surface); font-size: 12px; }
+    button:disabled { opacity: .45; cursor: default; }
+    .storage-note, .current-chapter { color: var(--muted); font-size: 12px; margin-block: 8px; }
+    .current-chapter { color: var(--gold-light); }
+    .chapter { scroll-margin-top: calc(var(--header-height) + 124px); }
+    .chapter.is-current .chapter-content > .eyebrow { color: var(--gold-light); }
+    .event-list { grid-column: 2 / -1; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; min-width: 0; }
+    .chapter-prologue .event-list, .chapter-era .event-list { grid-template-columns: 1fr; }
+    .event-node { min-width: 0; padding: 20px; text-align: left; border: 1px solid var(--line); background: var(--surface); transition: border-color .2s, transform .2s; }
+    .event-node:hover { border-color: var(--gold); transform: translateY(-3px); }
+    .event-node.is-highlight { grid-column: 1 / -1; background: linear-gradient(115deg, var(--surface-raised), var(--surface)); }
+    .event-node.is-read { border-left: 3px solid var(--gold); }
+    .event-node[aria-expanded="true"] { outline: 2px solid var(--gold-light); outline-offset: 3px; }
+    .event-meta { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px; color: var(--gold-light); font-size: 11px; letter-spacing: .06em; }
+    .event-read-state { color: var(--muted); }
+    .event-node.is-read .event-read-state { color: var(--gold-light); }
+    .event-name { display: block; margin-top: 16px; font-size: 20px; line-height: 1.5; }
+    .event-summary { display: block; margin-top: 12px; color: var(--muted); font-size: 14px; line-height: 1.9; }
+    .event-action { display: block; margin-top: 20px; color: var(--gold-light); font-size: 12px; }
+    .event-reader { padding: 32px 40px 40px; }
+    .event-reader h2 { margin-top: 20px; font-size: clamp(28px, 4vw, 44px); line-height: 1.4; }
+    .event-subtitle { margin-top: 12px; color: var(--gold-light); font-size: 18px; }
+    .event-story { margin-top: 28px; font-size: 16px; line-height: 2.1; white-space: pre-line; }
+    .event-nav { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; margin-top: 32px; }
+    .event-nav button { min-height: 48px; padding: 12px; border: 1px solid var(--gold); background: var(--metal-panel); font-size: 14px; }
+    .match-list { border-top: 1px solid var(--line); }
+    .match-card { display: grid; grid-template-columns: 100px minmax(0, 1fr) 160px; align-items: center; gap: 32px; width: 100%; min-width: 0; padding: 32px 16px; border: 0; border-bottom: 1px solid var(--line); background: transparent; text-align: left; transition: background-color .2s; }
+    .match-card:hover { background: var(--surface); }
+    .match-year { font-family: var(--serif); font-size: 40px; color: var(--gold-light); }
+    .match-tournament { display: block; color: var(--gold); font-size: 11px; letter-spacing: .14em; }
+    .match-teams { display: block; margin-top: 8px; font-family: 'Impact', 'Arial Narrow', var(--sans); font-size: 30px; }
+    .match-caption { display: block; margin-top: 12px; color: var(--muted); font-size: 14px; }
+    .match-score { text-align: right; }
+    .match-score strong { display: block; font-family: var(--serif); font-weight: 400; font-size: 56px; line-height: 1.2; font-variant-numeric: tabular-nums; }
+    .match-score small { display: block; margin-top: 12px; color: var(--gold-light); font-size: 12px; }
+    .match-note { margin-top: 24px; color: var(--muted); font-size: 12px; }
+    .quiz-shell { padding: 40px; border-block: 1px solid var(--line); background: radial-gradient(ellipse at 0% 0%, rgba(198, 166, 103, .07), transparent 65%); }
+    .quiz-intro-title, .quiz-result-title { margin-block: 20px; font-size: 28px; line-height: 1.5; }
+    .quiz-description, .quiz-result-message { max-width: 640px; color: var(--muted); font-size: 16px; line-height: 1.9; }
+    .quiz-primary { display: inline-flex; align-items: center; justify-content: center; min-width: 192px; min-height: 52px; margin-top: 28px; padding: 12px 24px; border: 1px solid var(--gold); background: var(--metal-brush), var(--metal-panel); font-size: 12px; letter-spacing: .12em; transition: border-color .2s, color .2s; }
+    .quiz-primary:hover { border-color: var(--gold-light); color: var(--gold-light); }
+    .quiz-primary, .quiz-question, .quiz-result-title, .quiz-option { scroll-margin-block: calc(var(--header-height) + 24px) 24px; }
+    .quiz-progress { display: block; width: 100%; height: 4px; margin-top: 20px; accent-color: var(--gold); }
+    .quiz-question { margin-block: 32px; font-size: clamp(22px, 3vw, 32px); line-height: 1.6; }
+    .quiz-question:focus-visible, .quiz-result-title:focus-visible, #event-title:focus-visible { outline: 2px solid var(--gold-light); outline-offset: 6px; }
+    .quiz-options { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+    .quiz-option { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; min-width: 0; min-height: 72px; padding: 16px 20px; text-align: left; border: 1px solid var(--line); background: var(--surface); font-size: 16px; }
+    .quiz-option:hover:not(:disabled) { border-color: var(--gold-light); }
+    .quiz-option:disabled { opacity: 1; }
+    .quiz-option-letter { color: var(--gold-light); font-family: var(--serif); font-size: 18px; }
+    .quiz-option-text { flex: 1; min-width: 0; overflow-wrap: anywhere; }
+    .quiz-option-state { width: 100%; padding-left: 28px; color: var(--gold-light); font-size: 12px; }
+    .quiz-option.is-correct { border-color: var(--gold-light); background: var(--surface-raised); }
+    .quiz-option.is-wrong { border-color: #e8a7ad; }
+    .quiz-option.is-wrong .quiz-option-state { color: #e8a7ad; }
+    .quiz-feedback { color: var(--ivory); font-size: 16px; line-height: 1.9; }
+    .quiz-feedback:not(:empty) { padding: 20px 0; margin-top: 12px; border-bottom: 1px solid var(--line); }
+    .quiz-final-score { margin-block: 24px; font-family: var(--serif); font-size: clamp(48px, 7vw, 88px); color: var(--gold-light); line-height: 1.2; font-variant-numeric: tabular-nums; }
+    .quiz-record { margin-top: 32px; color: var(--gold-light); font-size: 14px; }
+    .quiz-storage-note { margin-top: 8px; color: var(--muted); font-size: 12px; }
+    .chapter { position: relative; display: grid; grid-template-columns: minmax(220px, 38%) 1fr auto; align-items: center; gap: 32px; padding-block: 44px; border-bottom: 1px solid var(--line); }
+    .chapter-year { font-family: var(--serif); font-size: 88px; color: var(--gold); line-height: 1; letter-spacing: -.06em; }
+    .chapter h3 { margin-top: 10px; font-family: var(--serif); font-size: clamp(24px, 3.4vw, 48px); letter-spacing: -.035em; }
+    .chapter-summary { margin-top: 12px; font-size: 16px; color: var(--muted); }
+    .chapter-index { color: var(--muted); font-family: var(--serif); font-size: 14px; align-self: start; padding-top: 8px; }
+    .chapter-main { padding-block: 64px; }
+    .chapter-main .chapter-year { font-size: clamp(100px, 12vw, 176px); color: transparent; -webkit-text-stroke: 1px rgba(198, 166, 103, .65); }
+    .chapter-fall { background: radial-gradient(ellipse at 10% 50%, rgba(158, 27, 50, .12), transparent 65%); }
+    .chapter-fall .chapter-year { -webkit-text-stroke-color: #b76c72; }
+    .chapter-legacy { background: radial-gradient(ellipse at 10% 50%, rgba(198, 166, 103, .12), transparent 65%); }
+    .chapter-legacy .chapter-year { color: var(--gold-light); -webkit-text-stroke: 0; }
+    .section-quiz { background: radial-gradient(ellipse at 80% 50%, rgba(198, 166, 103, .06), transparent 65%); }
+    .section-quiz .section-title { color: var(--gold-light); }
+    .ending { padding-block: clamp(120px, 15vw, 224px); text-align: center; background: radial-gradient(ellipse at 50% 100%, rgba(198, 166, 103, .1), transparent 65%); }
+    .ending .section-title { font-size: clamp(36px, 7.8vw, 116px); }
+    .ending-copy { max-width: 420px; margin: 28px auto 0; font-size: 16px; color: var(--muted); }
+    .ending-rule { height: 48px; width: 1px; margin: 40px auto; background: var(--gold); }
+    .back-top { display: inline-flex; min-height: 44px; align-items: center; font-size: 10px; letter-spacing: .18em; color: var(--gold-light); }
+    footer { padding-block: 32px; border-top: 1px solid var(--line); }
+    .footer-inner { display: flex; justify-content: space-between; gap: 32px; font-size: 11px; color: var(--muted); }
+    .footer-inner p { max-width: 620px; }
+    .footer-source { flex-shrink: 0; }
+    .footer-source span { display: block; margin-top: 4px; }
+    @supports ((background-clip: text) or (-webkit-background-clip: text)) {
+      .hero-subtitle, .section-title, .chapter-legacy .chapter-year {
+        background-image: var(--metal-brush), var(--metal-gold);
+        background-clip: text; -webkit-background-clip: text; color: transparent;
+      }
+      .section-title { background-image: var(--metal-brush), var(--metal-ivory); }
+      .section-quiz .section-title { color: transparent; background-image: var(--metal-brush), var(--metal-gold); }
+      .player-monogram { background: var(--metal-gold); background-clip: text; -webkit-background-clip: text; color: transparent; text-shadow: none; }
+    }
+    @media (forced-colors: active) {
+      .hero h1, .hero-subtitle, .section-title, .chapter-legacy .chapter-year, .section-quiz .section-title { color: CanvasText; background: none; filter: none; -webkit-text-stroke: 0; }
+      .hero-title-art use { fill: CanvasText; stroke: none; filter: none; }
+      .hero-title-art g { filter: none; }
+      .player-monogram { color: CanvasText; background: none; text-shadow: none; }
+    }
+    @media (min-width: 768px) and (prefers-reduced-motion: no-preference) {
+      .hero-copy { animation: arrival .9s both; }
+      .chapter-entered .chapter-content { animation: arrival .5s both; }
+      @keyframes arrival { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
+    }
+    @media (max-width: 1023px) {
+      .primary-nav { gap: 20px; }
+      .hero-kicker { font-size: 9px; letter-spacing: .14em; }
+      .chapter { grid-template-columns: 32% 1fr auto; gap: 24px; }
+      .player-wall { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+      .player-card:nth-child(n) { margin-top: 0; min-height: 320px; }
+      .player-mark { min-height: 160px; }
+    }
+    @media (max-width: 767px) {
+      :root { --header-height: 144px; }
+      .header-inner { flex-direction: column; justify-content: center; gap: 6px; padding-block: 12px 0; }
+      .brand-mark { width: 24px; height: 24px; }
+      .brand-name { font-size: 16px; }
+      .brand-sub { font-size: 7px; }
+      .primary-nav { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); width: 100%; gap: 0 8px; }
+      .primary-nav a { font-size: 10px; letter-spacing: .05em; }
+      .hero { min-height: max(640px, calc(100svh - var(--header-height))); }
+      .hero-grid { display: block; padding-block: 112px 112px; }
+      .hero-kicker { margin-bottom: 32px; gap: 8px; font-size: 8px; letter-spacing: .1em; }
+      .hero-kicker::before, .hero-kicker::after { width: 16px; flex-shrink: 0; }
+      .hero-subtitle { margin-top: 20px; font-size: 15px; letter-spacing: .3em; }
+      .hero-description { max-width: 290px; margin-top: 28px; font-size: 16px; line-height: 2; }
+      .hero-art { width: 72px; top: 24px; opacity: .8; }
+      .hero-annotation { top: 32px; font-size: 8px; letter-spacing: .1em; }
+      .hero-foot { bottom: 28px; font-size: 8px; letter-spacing: .12em; }
+      .hero-foot > span { max-width: 140px; text-align: right; }
+      .section-heading { grid-template-columns: 1fr; gap: 24px; margin-bottom: 36px; }
+      .section-intro { justify-self: start; }
+      .player-wall { grid-template-columns: 1fr; padding-bottom: 20px; }
+      .player-card:nth-child(n) { display: grid; grid-template-columns: 72px minmax(0, 1fr); gap: 12px 24px; min-height: 168px; padding: 24px; }
+      .player-top { grid-column: 2; align-self: end; }
+      .player-mark { grid-column: 1; grid-row: 1 / 3; min-height: 112px; }
+      .player-monogram { font-size: 72px; }
+      .player-bottom { grid-column: 2; }
+      .player-name { font-size: 30px; }
+      .player-hint { margin-top: 8px; padding-top: 8px; }
+      .player-card:hover { transform: translateY(-2px); }
+      .dialog-inner { grid-template-columns: minmax(0, 1fr); gap: 24px; padding: 24px; }
+      .dialog-emblem { display: none; }
+      .dialog-header { padding-inline: 16px; }
+      .chapter-rail { gap: 4px; justify-content: space-between; }
+      .chapter-rail > span { display: none; }
+      .chapter-rail a { font-size: 17px; }
+      .chapter { grid-template-columns: 1fr auto; gap: 20px; padding-block: 32px; }
+      .chapter-year { font-size: 48px; grid-column: 1; }
+      .chapter-main .chapter-year { font-size: 104px; }
+      .chapter-content { grid-column: 1; }
+      .chapter-index { grid-column: 2; grid-row: 1; }
+      .event-list { grid-column: 1 / -1; grid-template-columns: 1fr; }
+      .event-reader { padding: 24px; }
+      .journey-progress { gap: 12px; }
+      .match-card { grid-template-columns: minmax(0, 1fr) auto; gap: 16px; padding: 24px 8px; }
+      .match-year { font-size: 28px; }
+      .match-copy { grid-column: 1 / -1; grid-row: 2; }
+      .match-score { grid-column: 2; grid-row: 1; }
+      .match-score strong { font-size: 44px; }
+      .match-score small { margin-top: 4px; }
+      .quiz-shell { padding: 28px 16px; }
+      .quiz-options { grid-template-columns: 1fr; }
+      .quiz-primary { width: 100%; }
+      .chapter-fall, .chapter-legacy { padding-left: 16px; }
+      .footer-inner { flex-direction: column; gap: 24px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after { animation: none !important; transition: none !important; }
+    }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#players">跳至主要內容</a>
+  <header class="site-header" id="site-header">
+    <div class="header-inner wrap">
+      <a class="brand" href="#hero" aria-label="ZOFGK — LEGACY OF FIVE，回到首頁">
+        <svg class="brand-mark" viewBox="0 0 32 32" fill="none" aria-hidden="true"><path d="M3 7l6 19M9 5l7 21M16 3v23M23 5l-7 21M29 7l-6 19M9 28h14" stroke="currentColor" stroke-width="1.2"/></svg>
+        <span><span class="brand-name">ZOFGK</span><span class="brand-sub">LEGACY OF FIVE</span></span>
+      </a>
+      <nav class="primary-nav" aria-label="主要導覽">
+        <a href="#players">THE FIVE</a><a href="#journey">THE JOURNEY</a><a href="#matches">LEGENDARY MOMENTS</a><a href="#quiz">QUIZ</a>
+      </nav>
+    </div>
+  </header>
+  <main>
+    <section class="hero" id="hero" aria-labelledby="hero-title">
+      <p class="hero-annotation hero-annotation-left">THE ZOFGK ARCHIVE<span>2020—2024</span></p>
+      <p class="hero-annotation hero-annotation-right">FIVE PLAYERS<span>ONE SHARED LEGACY</span></p>
+      <div class="hero-grid wrap">
+        <div class="hero-copy">
+          <p class="eyebrow hero-kicker">A STORY WRITTEN TOGETHER · 2020—2024</p>
+          <h1 id="hero-title">
+            <span class="visually-hidden">ZOFGK</span>
+            <svg class="hero-title-art" viewBox="0 0 1240 400" aria-hidden="true" focusable="false">
+              <defs>
+                <linearGradient id="cast-face" x1="0" y1="0" x2="0" y2="1">
+                  <stop stop-color="#f8eed9"/><stop offset=".15" stop-color="#b3a184"/><stop offset=".3" stop-color="#d7c9ae"/><stop offset=".43" stop-color="#a89473"/><stop offset=".48" stop-color="#fff5dd"/><stop offset=".54" stop-color="#c0ad8a"/><stop offset=".74" stop-color="#ecdec0"/><stop offset="1" stop-color="#ad9770"/>
+                </linearGradient>
+                <linearGradient id="cast-rim" x1="0" y1="0" x2=".65" y2="1">
+                  <stop stop-color="#fff5dc"/><stop offset=".16" stop-color="#8b7a5d"/><stop offset=".28" stop-color="#f1e0ba"/><stop offset=".4" stop-color="#29251e"/><stop offset=".52" stop-color="#e7d3a8"/><stop offset=".63" stop-color="#766243"/><stop offset=".79" stop-color="#f8edcf"/><stop offset="1" stop-color="#5d4b31"/>
+                </linearGradient>
+                <filter id="cast-shadow" x="-10%" y="-20%" width="120%" height="150%"><feDropShadow dx="0" dy="10" stdDeviation="8" flood-color="#000" flood-opacity=".7"/></filter>
+                <text id="cast-lettering" x="620" y="322" text-anchor="middle" textLength="1060" lengthAdjust="spacingAndGlyphs" font-family="Impact, Arial Narrow, sans-serif" font-size="340" font-weight="400" letter-spacing="12">ZOFGK</text>
+              </defs>
+              <g filter="url(#cast-shadow)" stroke-linejoin="round">
+                <use href="#cast-lettering" fill="#29251d" stroke="#080706" stroke-width="17" transform="translate(0 6)"/>
+                <use href="#cast-lettering" fill="#24211c" stroke="url(#cast-rim)" stroke-width="14"/>
+                <use href="#cast-lettering" fill="url(#cast-face)" stroke="#42392b" stroke-width="4"/>
+                <use href="#cast-lettering" fill="none" stroke="url(#cast-rim)" stroke-width="1.5"/>
+              </g>
+            </svg>
+          </h1>
+          <p class="hero-subtitle">LEGACY OF FIVE</p>
+          <p class="hero-description">從低谷到巔峰，一段屬於五人的王朝故事。</p>
+          <a class="explore" href="#players">EXPLORE THE LEGACY <span aria-hidden="true">↓</span></a>
+        </div>
+        <div class="hero-art" aria-hidden="true">
+          <svg viewBox="0 0 800 800" fill="none">
+            <defs>
+              <linearGradient id="sculpture-face" x1="220" y1="100" x2="550" y2="650" gradientUnits="userSpaceOnUse"><stop stop-color="#f4e1af"/><stop offset=".16" stop-color="#8e7449"/><stop offset=".29" stop-color="#d9c18c"/><stop offset=".38" stop-color="#3e3527"/><stop offset=".49" stop-color="#171510"/><stop offset=".58" stop-color="#8b7043"/><stop offset=".64" stop-color="#e5d0a0"/><stop offset=".73" stop-color="#54432b"/><stop offset=".88" stop-color="#b79a63"/><stop offset="1" stop-color="#e0cc98"/></linearGradient>
+              <linearGradient id="sculpture-side" x1="160" y1="140" x2="570" y2="610" gradientUnits="userSpaceOnUse"><stop stop-color="#685537"/><stop offset=".32" stop-color="#29251d"/><stop offset=".51" stop-color="#110f0c"/><stop offset=".68" stop-color="#9e8453"/><stop offset=".78" stop-color="#e0cc98"/><stop offset="1" stop-color="#453821"/></linearGradient>
+              <linearGradient id="sculpture-edge" x1="180" y1="100" x2="540" y2="650" gradientUnits="userSpaceOnUse"><stop stop-color="#fff4d5"/><stop offset=".3" stop-color="#c6a667"/><stop offset=".45" stop-color="#494030"/><stop offset=".63" stop-color="#fff2c5"/><stop offset=".78" stop-color="#80673c"/><stop offset="1" stop-color="#e0cc98"/></linearGradient>
+              <radialGradient id="sculpture-aura"><stop stop-color="#c6a667" stop-opacity=".08"/><stop offset="1" stop-color="#c6a667" stop-opacity="0"/></radialGradient>
+              <pattern id="sculpture-brush" patternUnits="userSpaceOnUse" width="4" height="4"><path d="M0 .5h4M0 2.5h4" stroke="#fff4d6" stroke-opacity=".1" stroke-width=".5"/><path d="M0 1.5h4" stroke="#080808" stroke-opacity=".18" stroke-width=".5"/></pattern>
+              <clipPath id="sculpture-outline"><path d="M130 190l80 48 184 388-81-69L130 190ZM253 108l59 42 84 476-52-99-91-419ZM400 66l31 93-31 467-31-467 31-93ZM547 108l-59 42-84 476 52-99 91-419ZM670 190l-80 48-184 388 81-69 183-367Z"/></clipPath>
+            </defs>
+            <circle cx="400" cy="370" r="330" fill="url(#sculpture-aura)"/>
+            <g stroke="url(#sculpture-edge)"><circle cx="400" cy="370" r="292" stroke-width="1.5" opacity=".45"/><circle cx="400" cy="370" r="294" stroke-width=".5" opacity=".2"/><circle cx="400" cy="370" r="306" opacity=".12"/><path d="M400 48v20m0 604v20M78 370h20m604 0h20" opacity=".65"/><path d="M185 154l14 14m402 402l14 14M185 586l14-14m402-402l14-14" opacity=".35"/></g>
+            <g fill="url(#sculpture-face)" stroke="url(#sculpture-edge)" stroke-width=".8">
+              <path d="M130 190l80 48 184 388-81-69L130 190Z"/>
+              <path d="M253 108l59 42 84 476-52-99-91-419Z"/>
+              <path d="M400 66l31 93-31 467-31-467 31-93Z"/>
+              <path d="M547 108l-59 42-84 476 52-99 91-419Z"/>
+              <path d="M670 190l-80 48-184 388 81-69 183-367Z"/>
+            </g>
+            <g fill="url(#sculpture-side)"><path d="M130 190l80 48 184 388L130 190ZM253 108l59 42 84 476-143-518ZM400 66l31 93-31 467V66ZM547 108l-91 419-52 99 143-518ZM670 190L406 626l81-69 183-367Z"/></g>
+            <rect x="120" y="60" width="560" height="580" fill="url(#sculpture-brush)" clip-path="url(#sculpture-outline)"/>
+            <g stroke="url(#sculpture-edge)" stroke-width="1.2"><path d="M130 190l264 436M253 108l143 518M400 66v560M547 108L404 626M670 190L406 626"/></g>
+            <path d="M400 646l7 12-7 12-7-12 7-12Z" fill="#c6a667"/>
+            <path d="M300 706h78m44 0h78" stroke="#c6a667" stroke-opacity=".3"/>
+            <text x="400" y="710" text-anchor="middle" fill="#c6a667" font-family="Georgia, serif" font-size="13">V</text>
+          </svg>
+        </div>
+      </div>
+      <div class="hero-foot"><a href="#players">SCROLL TO DISCOVER</a><span>AN UNOFFICIAL TRIBUTE TO THE FIVE</span></div>
+    </section>
+    <section class="section wrap" id="players" aria-labelledby="players-title" tabindex="-1">
+      <div class="section-heading">
+        <div><p class="eyebrow">01 / THE PEOPLE BEHIND THE LEGACY</p><h2 class="section-title" id="players-title">THE FIVE</h2></div>
+        <p class="section-intro">ZOFGK，來自 Zeus、Oner、Faker、Gumayusi、Keria。五個名字，一段共同寫下的故事。</p>
+      </div>
+      <div class="player-wall" id="player-wall" role="group" aria-label="五名選手，選擇卡片查看介紹"></div>
+      <p class="player-note">選擇一位選手，認識他在這段故事中的位置。此處記錄的是 ZOFGK 時期的五人組合。</p>
+      <noscript><p>請啟用 JavaScript，以開啟 Zeus、Oner、Faker、Gumayusi 與 Keria 的詳細介紹。</p></noscript>
+    </section>
+    <section class="section wrap" id="journey" aria-labelledby="journey-title">
+      <div class="section-heading">
+        <div><p class="eyebrow">02 / FROM THE BEGINNING</p><h2 class="section-title" id="journey-title">THE JOURNEY</h2></div>
+        <p class="section-intro">從尚未成形的五人，到共同留下的傳奇。沿著年份，走過這段旅程。</p>
+      </div>
+      <nav class="chapter-rail" id="year-navigation" aria-label="故事年份導覽"><span>THE ARCHIVE</span><a id="year-link-2020" href="#year-2020">2020</a><a id="year-link-2021" href="#year-2021">2021</a><a id="year-link-2022" href="#year-2022">2022</a><a id="year-link-2023" href="#year-2023">2023</a><a id="year-link-2024" href="#year-2024">2024</a></nav>
+      <div class="journey-progress"><p id="read-count" role="status" aria-live="polite" aria-atomic="true"></p><button class="reset-reading" id="reset-reading" type="button">重設閱讀進度</button><progress id="read-progress" value="0" max="14" aria-label="事件探索進度"></progress></div>
+      <p class="storage-note" id="storage-note"></p>
+      <p class="current-chapter" id="current-chapter"></p>
+      <div id="journey-chapters"></div>
+      <noscript><p>請啟用 JavaScript，以探索 2020～2024 的故事章節與閱讀進度。</p></noscript>
+    </section>
+    <section class="section wrap" id="matches" aria-labelledby="matches-title">
+      <div class="section-heading"><div><p class="eyebrow">03 / MORE THAN A SCORE</p><h2 class="section-title" id="matches-title">LEGENDARY<br>MOMENTS</h2></div><p class="section-intro">有些交鋒，留下的不只是比分。回望那些改變故事走向的瞬間。</p></div>
+      <div class="match-list" id="match-list" role="group" aria-label="五場經典賽事，選擇查看故事"></div>
+      <p class="match-note">選擇賽事閱讀故事，也會計入對應時間軸事件的探索進度。</p>
+      <noscript><p>請啟用 JavaScript，以查看五場經典賽事的比分與故事。</p></noscript>
+    </section>
+    <section class="section section-quiz wrap" id="quiz" aria-labelledby="quiz-title">
+      <div class="section-heading"><div><p class="eyebrow">04 / HOW MUCH DO YOU REMEMBER?</p><h2 class="section-title" id="quiz-title">KNOW THE<br>LEGACY</h2></div><p class="section-intro">走過五人的旅程，哪些片刻留在你的記憶裡？</p></div>
+      <div class="quiz-shell">
+        <div id="quiz-intro">
+          <p class="eyebrow">FIVE QUESTIONS / 100 POINTS</p>
+          <h3 class="quiz-intro-title">五個問題，重溫共同記憶。</h3>
+          <p class="quiz-description">每題四選一，答對得 20 分。作答後會顯示答案與解釋，再由你決定何時前進。</p>
+          <button class="quiz-primary" id="quiz-start" type="button">START QUIZ</button>
+        </div>
+        <div id="quiz-play" hidden>
+          <p class="eyebrow" id="quiz-status"></p>
+          <progress class="quiz-progress" id="quiz-progress" value="0" max="5" aria-label="已作答題數"></progress>
+          <h3 class="quiz-question" id="quiz-question" tabindex="-1"></h3>
+          <div class="quiz-options" id="quiz-options" role="group" aria-labelledby="quiz-question"></div>
+          <p class="quiz-feedback" id="quiz-feedback" role="status" aria-live="polite" aria-atomic="true"></p>
+          <button class="quiz-primary" id="quiz-next" type="button" disabled hidden>下一題 →</button>
+        </div>
+        <div id="quiz-result" hidden>
+          <p class="eyebrow">YOUR LEGACY / 測驗完成</p>
+          <h3 class="quiz-result-title" id="quiz-result-title" tabindex="-1">這段故事，你記住了多少？</h3>
+          <p class="quiz-final-score" id="quiz-final-score"></p>
+          <p class="quiz-result-message" id="quiz-result-message"></p>
+          <button class="quiz-primary" id="quiz-retry" type="button">RETRY</button>
+        </div>
+        <p class="quiz-record" id="quiz-best-score"></p>
+        <p class="quiz-storage-note" id="quiz-storage-note"></p>
+      </div>
+      <noscript><p>請啟用 JavaScript，以開始五題知識問答。</p></noscript>
+    </section>
+    <section class="section ending" id="ending" aria-labelledby="ending-title"><div class="wrap"><p class="eyebrow">THE STORY REMAINS</p><h2 class="section-title" id="ending-title">FIVE AS ONE</h2><div class="ending-rule" aria-hidden="true"></div><p class="ending-copy">旅程有終點，共同寫下的故事會留下。<br>致五人，也致每一位記得的人。</p><a class="back-top" href="#hero">BACK TO THE BEGINNING ↑</a></div></section>
+  </main>
+  <footer><div class="footer-inner wrap"><div><p class="eyebrow">ZOFGK — LEGACY OF FIVE</p><p>非官方、非商業粉絲創作，與 Riot Games 或 T1 無官方關聯。相關名稱與商標屬各權利人所有。</p></div><div class="footer-source">資料來源<a href="https://www.leagueoflegends.com/ko-kr/news/announcements/2023-worlds-champion-t1/">Riot Games｜2023 奪冠公告（韓文）</a><a href="https://www.leagueoflegends.com/ko-kr/news/notices/2024-worlds-winner/">Riot Games｜2024 奪冠公告（韓文）</a></div></div></footer>
+  <dialog class="player-dialog" id="player-dialog" aria-labelledby="player-dialog-name" aria-describedby="player-dialog-bio">
+    <div class="dialog-header"><p class="eyebrow">THE FIVE / PLAYER ARCHIVE</p><button class="dialog-close" id="player-dialog-close" type="button" autofocus>關閉 ×</button></div>
+    <div class="dialog-inner">
+      <div class="dialog-emblem" aria-hidden="true"><span class="dialog-monogram" id="player-dialog-monogram"></span><small>LEGACY OF FIVE</small></div>
+      <div>
+        <p class="eyebrow" id="player-dialog-role"></p>
+        <h2 class="dialog-name" id="player-dialog-name"></h2>
+        <p class="dialog-bio" id="player-dialog-bio"></p>
+        <ul class="dialog-tags" id="player-dialog-tags" aria-label="選手特色"></ul>
+        <section class="dialog-moment" aria-labelledby="player-dialog-moment-title">
+          <p class="eyebrow">DEFINING MOMENT / 代表時刻</p>
+          <h3 id="player-dialog-moment-title"></h3>
+          <p id="player-dialog-moment-story"></p>
+          <a class="dialog-source" id="player-dialog-source" target="_blank" rel="noopener noreferrer" hidden>閱讀官方資料（韓文，另開分頁） ↗</a>
+        </section>
+        <button class="dialog-return" id="player-dialog-return" type="button">回到五人展示</button>
+      </div>
+    </div>
+  </dialog>
+  <dialog class="player-dialog" id="event-dialog" aria-labelledby="event-title" aria-describedby="event-story">
+    <div class="dialog-header"><p class="eyebrow" id="event-position"></p><button class="dialog-close" id="event-close" type="button" autofocus>關閉 ×</button></div>
+    <div class="event-reader">
+      <p class="eyebrow" id="event-chapter"></p>
+      <h2 id="event-title" tabindex="-1"></h2>
+      <p class="event-subtitle" id="event-subtitle"></p>
+      <p class="event-story" id="event-story"></p>
+      <ul class="dialog-tags" id="event-tags" aria-label="事件標籤"></ul>
+      <a class="dialog-source" id="event-source" target="_blank" rel="noopener noreferrer" hidden>閱讀官方來源（韓文，另開分頁） ↗</a>
+      <div class="event-nav"><button id="event-prev" type="button">← 上一事件</button><button id="event-next" type="button">下一事件 →</button></div>
+    </div>
+  </dialog>
+  <script>
+    'use strict';
+
+    const players = [
+      {
+        id: 'zeus', name: 'Zeus', role: 'TOP', roleLabel: '上路', monogram: 'Z',
+        bio: 'Zeus 是 ZOFGK 的上路選手。上路的單線對抗與側翼牽制，讓他的故事帶著獨自承擔的重量。從五人陣容逐步穩定，到與隊友一同站上世界之巔，他是這段共同旅程中不可缺少的一角。',
+        keywords: ['單線對抗', '側翼牽制', '上路承擔'],
+        moment: { title: '2023｜與五人一同登頂', story: '2023 世界賽決賽，T1 以 3:0 擊敗 WBG。Zeus 與隊友把前一年的遺憾，接續成共同捧盃的記憶。', sourceUrl: 'https://www.leagueoflegends.com/ko-kr/news/announcements/2023-worlds-champion-t1/' }
+      },
+      {
+        id: 'oner', name: 'Oner', role: 'JUNGLE', roleLabel: '打野', monogram: 'O',
+        bio: 'Oner 是五人陣容的打野選手。野區路線、進場判斷與隊友連動，構成了理解他的位置的入口。在這段由挫折走向冠軍的旅程裡，他的角色是把各條戰線連接起來，讓個人的行動成為團隊向前的節奏。',
+        keywords: ['野區節奏', '團隊連動', '進場判斷'],
+        moment: { title: '2023｜跨過通往決賽的關卡', story: '世界賽四強，T1 以 3:1 擊敗 JDG。Oner 與隊友跨過這道關卡，讓五人再次站上世界賽決賽的舞台。', sourceUrl: '' }
+      },
+      {
+        id: 'faker', name: 'Faker', role: 'MID', roleLabel: '中路', monogram: 'F',
+        bio: 'Faker 是 ZOFGK 的中路，也是許多人認識這支隊伍的起點。但這段故事屬於五個人：從傷缺時的困境、回歸後的重整，到世界賽的關鍵時刻，他與年輕隊友共同經歷失敗，再把彼此的名字留在冠軍記憶之中。',
+        keywords: ['中路核心', '逆境回歸', '關鍵時刻'],
+        moment: { title: '2024｜將故事推向二連霸', story: '2024 世界賽決賽，T1 以 3:2 擊敗 BLG。Faker 在第四、第五局的關鍵表現，成為這場五局交鋒的重要篇章。', sourceUrl: 'https://www.leagueoflegends.com/ko-kr/news/notices/2024-worlds-winner/' }
+      },
+      {
+        id: 'gumayusi', name: 'Gumayusi', role: 'ADC', roleLabel: '下路射手', monogram: 'G',
+        bio: 'Gumayusi 是五人陣容的下路射手，與 Keria 組成下路搭檔。射手的位置需要在輸出與生存之間尋找空間，也需要相信隊友創造的機會。從決賽失利到重新捧盃，他的篇章與這支隊伍的成長緊緊相連。',
+        keywords: ['下路搭檔', '輸出空間', '團戰站位'],
+        moment: { title: '2023｜把遺憾留在身後', story: '從 2022 世界賽決賽的失利，走到 2023 決賽以 3:0 擊敗 WBG。Gumayusi 與隊友一同完成了重返王座的旅程。', sourceUrl: 'https://www.leagueoflegends.com/ko-kr/news/announcements/2023-worlds-champion-t1/' }
+      },
+      {
+        id: 'keria', name: 'Keria', role: 'SUPPORT', roleLabel: '輔助', monogram: 'K',
+        bio: 'Keria 是 ZOFGK 的輔助選手，與 Gumayusi 並肩站在下路。視野、支援與創造機會，是閱讀這個位置的三條線索。從五人磨合到共同奪冠，他的故事提醒觀眾，聚光燈之外的連結，也是團隊走向勝利的一部分。',
+        keywords: ['視野佈局', '支援連動', '創造機會'],
+        moment: { title: '2024｜再次走進最後的舞台', story: '2024 世界賽四強，T1 以 3:1 擊敗 Gen.G。Keria 與隊友再次取得決賽資格，讓五人共同的旅程走向二連霸的終章。', sourceUrl: '' }
+      }
+    ];
+
+    const chapters = [
+      { id: 'before', year: 2020, anchor: 'year-2020', label: 'PROLOGUE I', title: 'BEFORE THE FIVE', intro: '重組前夕。這時的 T1 還不是後來的 ZOFGK，故事從缺席世界賽的一年開始。', style: 'chapter-prologue' },
+      { id: 'chaos', year: 2021, anchor: 'year-2021', label: 'PROLOGUE II', title: 'THE CHAOS', intro: '從擴充陣容到賽季輪換，五人的故事仍在尋找形狀。', style: 'chapter-prologue' },
+      { id: 'fall', year: 2022, anchor: 'year-2022', label: 'CHAPTER I', title: 'THE FALL', intro: '五人站穩位置，寫下完美春季，卻在國際賽的最後一步接連受挫。', style: 'chapter-main chapter-fall' },
+      { id: 'rise', year: 2023, anchor: 'year-2023', label: 'CHAPTER II', title: 'THE RISE', intro: '傷缺與低潮之後，五人重新並肩，沿著 LNG、JDG、WBG 的關卡走回王座。', style: 'chapter-main' },
+      { id: 'legacy', year: 2024, anchor: 'year-2024', label: 'CHAPTER III', title: 'THE LEGACY', intro: '跨過 Gen.G，再與 BLG 戰至第五局。共同的名字，留在連續兩年的冠軍記憶裡。', style: 'chapter-main chapter-legacy' },
+      { id: 'era', year: 2024, anchor: 'year-2024-ending', label: 'EPILOGUE', title: 'END OF AN ERA', intro: '五人陣容告一段落；故事最後留下的，是他們一起完成的事。', style: 'chapter-era' }
+    ];
+
+    const events = [
+      {
+        id: 'worlds-2020-absence', year: 2020, chapter: 'before', title: '從缺席開始的序章', subtitle: 'T1 無緣 2020 世界賽', dateLabel: '2020', tags: ['序章', '轉型'], highlight: false, sourceUrl: '',
+        summary: '這一年還沒有完整的 ZOFGK，T1 在轉型的路口重新出發。',
+        story: '2020 年，T1 沒有取得世界賽資格。對習慣把目光投向最高舞台的觀眾而言，這是需要重新理解隊伍的一年。此時還沒有後來穩定出賽的 ZOFGK 五人組合，也不能把未來的成功套回當時。這段序章的意義，是讓故事保留起點：在冠軍與傳奇之前，隊伍先面對缺席，再尋找下一個階段。'
+      },
+      {
+        id: 'roster-2021-expansion', year: 2021, chapter: 'chaos', title: '擴充陣容，尋找答案', subtitle: '2020 年底的規劃，2021 賽季的輪換', dateLabel: '2020 年底～2021', tags: ['陣容', '磨合'], highlight: false, sourceUrl: '',
+        summary: '十人陣容的背景與大輪換，屬於跨年規劃及 2021 賽季。',
+        story: '2020 年底，T1 為新賽季擴充陣容，十人規劃成為 2021 賽季輪換的背景。上場組合持續調整，隊伍也在嘗試不同可能。這不是完整 ZOFGK 已經成形的證明，更不代表 2020 整年都在進行大輪換。回看這段歷史，可以先記住時間的界線：規劃從年底開始，反覆輪換與磨合則是接下來賽季的重要課題。'
+      },
+      {
+        id: 'core-2021-formation', year: 2021, chapter: 'chaos', title: '在磨合中靠近彼此', subtitle: '五人的故事仍在形成', dateLabel: '2021', tags: ['序章', '成長'], highlight: false, sourceUrl: '',
+        summary: '輪換帶來不確定，也讓未來的核心逐步累積共同經驗。',
+        story: '2021 年的故事，還不是一套固定五人從頭打到尾的故事。輪換與磨合交織，選手需要在變動之中理解自己的位置，也理解隊友。後來回望，人們容易直接記住 ZOFGK 這五個字母，卻忽略陣容形成需要時間。這一章保留的正是那段過程：共同經驗逐漸累積，而真正穩定並肩出賽的主線，要到下一年才展開。'
+      },
+      {
+        id: 'five-2022-stable', year: 2022, chapter: 'fall', title: '五個名字，終於並肩', subtitle: 'Zeus / Oner / Faker / Gumayusi / Keria', dateLabel: '2022', tags: ['ZOFGK', '陣容'], highlight: false, sourceUrl: '',
+        summary: '穩定的五人組合，讓這段共同旅程有了清楚的主角。',
+        story: '到了 2022 年，Zeus、Oner、Faker、Gumayusi、Keria 這套五人組合穩定出賽。ZOFGK 不再只是回顧時方便使用的縮寫，而是一群在同一場比賽裡分擔責任的選手。上路、野區、中路與下路彼此連接，勝負也逐漸成為共同承受的結果。接下來的完美開局與決賽遺憾，都將由這五個名字一起走過。'
+      },
+      {
+        id: 'lck-2022-spring', year: 2022, chapter: 'fall', title: '完美的春天', subtitle: 'LCK 春季例行賽 18–0，最終奪冠', dateLabel: '2022 春季', tags: ['LCK', '冠軍'], highlight: true, sourceUrl: '',
+        summary: '十八場全勝的例行賽，讓外界看見五人組合的可能。',
+        story: '2022 LCK 春季賽，T1 以例行賽 18–0 寫下全勝戰績，並在季後賽走到最後、拿下冠軍。對這套逐漸穩定的五人陣容而言，春天像是一個明亮的起點：磨合開始轉化成勝利，觀眾也把期待投向更遠的舞台。但例行賽十八戰全勝，不代表整個賽季每一小局都不曾失利；這段旅程接下來仍有需要跨越的關卡。'
+      },
+      {
+        id: 'msi-2022-final', year: 2022, chapter: 'fall', title: '第一次停在最後一步', subtitle: 'MSI 決賽失利', dateLabel: '2022 MSI', tags: ['MSI', '挫折'], highlight: false, sourceUrl: '',
+        summary: '國內的成功沒有自動延續成國際冠軍，五人面對新的落差。',
+        story: '帶著春季賽的成功走向 MSI，T1 的五人組合再次接近冠軍，卻在決賽停下腳步。國內賽場累積的自信，並不能替國際賽預先寫好結局。這場失利不是整段故事的終點，卻讓完美開局第一次出現清楚的裂縫。對第一次認識這支隊伍的觀眾而言，它也提醒我們：後來被稱為傳奇的陣容，同樣經歷過期待與結果之間的距離。'
+      },
+      {
+        id: 'worlds-2022-final', year: 2022, chapter: 'fall', title: '距離冠軍，只差一步', subtitle: '世界賽決賽｜T1 2:3 DRX', dateLabel: '2022 Worlds', tags: ['Worlds', '決賽'], highlight: true, sourceUrl: '',
+        summary: '五局決賽之後，五人與獎盃擦肩而過。',
+        story: '2022 世界賽決賽，T1 與 DRX 戰至第五局，最後以 2:3 落敗。春天看似一路向前的五人，在最大的舞台再次碰到最後一道門檻。這場比賽的重量不只在比分，也在於他們曾經如此接近。故事在這裡停留片刻，讓遺憾被看見；但不替選手杜撰心聲，也不把失敗當成注定。下一年，他們仍要重新爭取回到這裡的機會。'
+      },
+      {
+        id: 'faker-2023-return', year: 2023, chapter: 'rise', title: '從失序，到再次聚攏', subtitle: 'Faker 傷缺與回歸', dateLabel: '2023 夏季', tags: ['逆境', '回歸'], highlight: false, sourceUrl: '',
+        summary: '傷缺帶來低潮；回歸後，五人重新整理共同的節奏。',
+        story: '2023 年，Faker 因傷缺席，T1 也在這段期間經歷困境。少了一位長期並肩的隊友，隊伍需要重新處理連動與節奏。Faker 回歸後，五人再次站在一起，但故事並不是按下開關就立刻回到巔峰。真正重要的是重新整隊、繼續往前。世界賽到來時，這套陣容必須帶著已經經歷過的失利與不確定，再次走進競爭最激烈的舞台。'
+      },
+      {
+        id: 'worlds-2023-lng', year: 2023, chapter: 'rise', title: '通往王座的第一道關卡', subtitle: '世界賽八強｜淘汰 LNG', dateLabel: '2023 Worlds', tags: ['Worlds', 'LPL'], highlight: false, sourceUrl: '',
+        summary: '淘汰 LNG，讓五人的世界賽旅程繼續向前。',
+        story: '進入 2023 世界賽淘汰賽，T1 在八強面對 LNG，並取得晉級。對整段敘事而言，這是五人重新走向決賽的重要一站，也開啟了接連面對 LPL 隊伍的淘汰賽路線。此時冠軍還沒有到手，前方仍有強敵。比起把結果寫成早已註定，這一章更想保留一步一步闖關的感覺：每跨過一個對手，距離那座曾經錯過的獎盃才近一點。'
+      },
+      {
+        id: 'worlds-2023-jdg', year: 2023, chapter: 'rise', title: '第四局，故事的轉折', subtitle: '世界賽四強｜T1 3:1 JDG', dateLabel: '2023 Worlds', tags: ['Worlds', '關鍵時刻'], highlight: true, sourceUrl: '',
+        summary: '第四局的關鍵場面，成為五人重返決賽的共同記憶。',
+        story: '2023 世界賽四強，T1 以 3:1 擊敗 JDG。第四局的關鍵場面，讓 Faker 與隊友把握住通往決賽的機會，也成為許多人回看這屆世界賽時會停留的一幕。這不是只有一個人的故事：開戰、跟進與後續收束，都需要五人共同完成。當比賽結束，通往王座的路又少了一道關卡，而他們終於再度站到可以改寫去年結局的位置。'
+      },
+      {
+        id: 'worlds-2023-final', year: 2023, chapter: 'rise', title: '重返世界之巔', subtitle: '世界賽決賽｜T1 3:0 WBG', dateLabel: '2023 Worlds', tags: ['Worlds', '冠軍'], highlight: true, sourceUrl: 'https://www.leagueoflegends.com/ko-kr/news/announcements/2023-worlds-champion-t1/',
+        summary: '走過 LNG、JDG，五人在決賽擊敗 WBG，終於共同捧盃。',
+        story: '2023 世界賽決賽，T1 以 3:0 擊敗 WBG，重新站上世界之巔。從八強的 LNG、四強的 JDG，到最後的 WBG，五人沿著接連面對 LPL 隊伍的路線走到終點。前一年的遺憾並沒有被抹去，而是成為這次捧盃的背景。對 ZOFGK 而言，最值得留下的畫面，是五個名字終於和同一座冠軍獎盃連在一起，讓共同的旅程有了新的篇章。'
+      },
+      {
+        id: 'worlds-2024-geng', year: 2024, chapter: 'legacy', title: '跨過熟悉的強敵', subtitle: '世界賽四強｜T1 3:1 Gen.G', dateLabel: '2024 Worlds', tags: ['Worlds', '四強'], highlight: false, sourceUrl: '',
+        summary: '擊敗 Gen.G，再次取得決賽資格，衛冕的故事仍在延續。',
+        story: '2024 世界賽四強，T1 以 3:1 擊敗 Gen.G，再度取得決賽資格。對已經共同捧過盃的五人而言，回到最後舞台仍需要重新證明自己，過去的冠軍不會替今天贏下比賽。這一關讓衛冕的可能變得清楚，也讓觀眾再次看見這套陣容在世界賽上的連結。但故事還差最後一場系列賽，前方等待他們的，是另一支渴望寫下歷史的隊伍。'
+      },
+      {
+        id: 'worlds-2024-final', year: 2024, chapter: 'legacy', title: '五人，把傳奇再寫一次', subtitle: '世界賽決賽｜T1 3:2 BLG', dateLabel: '2024 Worlds', tags: ['Worlds', '二連霸'], highlight: true, sourceUrl: 'https://www.leagueoflegends.com/ko-kr/news/notices/2024-worlds-winner/',
+        summary: '第四、第五局的關鍵表現，將五局交鋒帶向二連霸。',
+        story: '2024 世界賽決賽，T1 與 BLG 戰至第五局，最後以 3:2 奪冠。Faker 在第四、第五局的關鍵表現，與隊友的共同承接，成為這場交鋒的重要記憶。五人把 2023 年的捧盃延續成 2024 年的二連霸，也讓這套陣容的故事多了一層重量。傳奇不是永遠順利，而是在一次次必須重新回答的挑戰面前，他們仍然一起走到了最後。'
+      },
+      {
+        id: 'zeus-2024-farewell', year: 2024, chapter: 'era', title: '陣容告別，記憶留下', subtitle: 'Zeus 離隊，ZOFGK 五人陣容告一段落', dateLabel: '2024 年末', tags: ['告別', '共同記憶'], highlight: false, sourceUrl: '',
+        summary: '結尾不只屬於告別，也屬於五人一起留下的成就。',
+        story: '2024 年，Zeus 離隊，ZOFGK 這套五人陣容告一段落。這個結尾不需要以未經證實的談判細節、對白或動機來填滿。值得紀念的，是他們已經共同完成的事：從穩定成形，經歷決賽失利，到世界賽奪冠與二連霸。陣容會改變，個人的旅程也會繼續；而這五個名字在同一段時光裡留下的連結，仍然屬於每一位記得這個故事的人。'
+      }
+    ];
+
+    const matches = [
+      { id: 'match-2022-final', eventId: 'worlds-2022-final', year: 2022, tournament: 'WORLDS FINAL', opponent: 'DRX', score: '2:3', caption: '第五局之後，把遺憾留給下一年的答案。' },
+      { id: 'match-2023-semifinal', eventId: 'worlds-2023-jdg', year: 2023, tournament: 'WORLDS SEMIFINAL', opponent: 'JDG', score: '3:1', caption: '第四局的關鍵場面，讓重返決賽成為可能。' },
+      { id: 'match-2023-final', eventId: 'worlds-2023-final', year: 2023, tournament: 'WORLDS FINAL', opponent: 'WBG', score: '3:0', caption: '走過逆境，五個名字終於和冠軍並列。' },
+      { id: 'match-2024-semifinal', eventId: 'worlds-2024-geng', year: 2024, tournament: 'WORLDS SEMIFINAL', opponent: 'Gen.G', score: '3:1', caption: '跨過熟悉的強敵，再次走向最後的舞台。' },
+      { id: 'match-2024-final', eventId: 'worlds-2024-final', year: 2024, tournament: 'WORLDS FINAL', opponent: 'BLG', score: '3:2', caption: '第四、第五局之後，把捧盃寫成二連霸。' }
+    ];
+
+    const questions = [
+      { id: 'jungler', prompt: 'ZOFGK 中，擔任打野位置的是誰？', options: ['Zeus', 'Oner', 'Faker', 'Keria'], answer: 1, explanation: 'Oner 擔任打野，串連野區與各條戰線。' },
+      { id: 'spring-record', prompt: 'T1 在 2022 LCK 春季例行賽的戰績是？', options: ['16–2', '17–1', '18–0', '15–3'], answer: 2, explanation: 'T1 的春季例行賽十八戰全勝，並在季後賽拿下冠軍。' },
+      { id: 'final-2022', prompt: '2022 世界賽決賽，T1 以 2:3 敗給哪支隊伍？', options: ['DRX', 'JDG', 'WBG', 'BLG'], answer: 0, explanation: 'DRX 在五局決賽中擊敗 T1，這場遺憾成為五人故事的重要轉折。' },
+      { id: 'final-2023', prompt: '2023 世界賽決賽，T1 對 WBG 的勝出比分是？', options: ['3:2', '2:3', '3:1', '3:0'], answer: 3, explanation: 'T1 以 3:0 擊敗 WBG，五人一起站上世界之巔。' },
+      { id: 'final-2024', prompt: '哪個結果讓 ZOFGK 完成世界賽二連霸？', options: ['T1 3:1 BLG', 'T1 3:2 BLG', 'T1 2:3 BLG', 'T1 0:3 BLG'], answer: 1, explanation: '2024 世界賽決賽，T1 以 3:2 擊敗 BLG，接續 2023 年完成二連霸。' }
+    ];
+
+    const playerWall = document.getElementById('player-wall');
+    const playerDialog = document.getElementById('player-dialog');
+    const closePlayerButton = document.getElementById('player-dialog-close');
+    let lastPlayerButton = null;
+    let startedOnBackdrop = false;
+
+    function createTextElement(tag, className, text) {
+      const element = document.createElement(tag);
+      element.className = className;
+      element.textContent = text;
+      return element;
+    }
+
+    function openPlayer(player, trigger) {
+      if (playerDialog.open) return;
+      lastPlayerButton = trigger;
+      document.getElementById('player-dialog-monogram').textContent = player.monogram;
+      document.getElementById('player-dialog-role').textContent = `${player.role} / ${player.roleLabel}`;
+      document.getElementById('player-dialog-name').textContent = player.name;
+      document.getElementById('player-dialog-bio').textContent = player.bio;
+      document.getElementById('player-dialog-tags').replaceChildren(
+        ...player.keywords.map(keyword => createTextElement('li', '', keyword))
+      );
+      document.getElementById('player-dialog-moment-title').textContent = player.moment.title;
+      document.getElementById('player-dialog-moment-story').textContent = player.moment.story;
+      const sourceLink = document.getElementById('player-dialog-source');
+      sourceLink.hidden = !player.moment.sourceUrl;
+      sourceLink.href = player.moment.sourceUrl || '';
+      playerDialog.showModal();
+      document.body.classList.add('dialog-open');
+      closePlayerButton.focus({ preventScroll: true });
+    }
+
+    function renderPlayers() {
+      const cards = players.map((player, index) => {
+        const card = createTextElement('button', 'player-card', '');
+        card.type = 'button';
+        card.setAttribute('aria-label', `認識 ${player.name}，${player.roleLabel} ${player.role}`);
+        card.setAttribute('aria-haspopup', 'dialog');
+        card.setAttribute('aria-controls', 'player-dialog');
+        const top = createTextElement('span', 'player-top', '');
+        top.append(createTextElement('span', 'player-number', `0${index + 1}`), createTextElement('span', '', player.role));
+        const mark = createTextElement('span', 'player-mark', '');
+        mark.setAttribute('aria-hidden', 'true');
+        mark.append(createTextElement('span', 'player-monogram', player.monogram));
+        const bottom = createTextElement('span', 'player-bottom', '');
+        const hint = createTextElement('span', 'player-hint', '探索選手');
+        const arrow = createTextElement('span', '', '↗');
+        arrow.setAttribute('aria-hidden', 'true');
+        hint.append(arrow);
+        bottom.append(createTextElement('span', 'player-name', player.name), hint);
+        card.append(top, mark, bottom);
+        card.addEventListener('click', () => openPlayer(player, card));
+        return card;
+      });
+      playerWall.replaceChildren(...cards);
+    }
+
+    function isBackdropPointer(event, dialog = playerDialog) {
+      if (event.target !== dialog) return false;
+      const bounds = dialog.getBoundingClientRect();
+      return event.clientX < bounds.left || event.clientX > bounds.right || event.clientY < bounds.top || event.clientY > bounds.bottom;
+    }
+
+    closePlayerButton.addEventListener('click', () => playerDialog.close());
+    document.getElementById('player-dialog-return').addEventListener('click', () => playerDialog.close());
+    playerDialog.addEventListener('pointerdown', event => { startedOnBackdrop = isBackdropPointer(event); });
+    playerDialog.addEventListener('pointercancel', () => { startedOnBackdrop = false; });
+    playerDialog.addEventListener('click', event => {
+      if (startedOnBackdrop && isBackdropPointer(event)) playerDialog.close();
+      startedOnBackdrop = false;
+    });
+    playerDialog.addEventListener('close', () => {
+      document.body.classList.remove('dialog-open');
+      startedOnBackdrop = false;
+      if (lastPlayerButton && lastPlayerButton.isConnected) lastPlayerButton.focus({ preventScroll: true });
+    });
+
+    const READ_EVENTS_KEY = 'zofgk_legacy_v1_read_events';
+    const validEventIds = new Set(events.map(event => event.id));
+    const eventButtons = new Map();
+    const eventReadLabels = new Map();
+    const chapterElements = new Map();
+    const yearLinks = new Map([2020, 2021, 2022, 2023, 2024].map(year => [year, document.getElementById(`year-link-${year}`)]));
+    const eventDialog = document.getElementById('event-dialog');
+    const eventCloseButton = document.getElementById('event-close');
+    const previousEventButton = document.getElementById('event-prev');
+    const nextEventButton = document.getElementById('event-next');
+    let storageAvailable = true;
+    let activeEventIndex = -1;
+    let eventTrigger = null;
+    let eventOriginChapter = null;
+    let eventBackdropStarted = false;
+    const readEvents = loadReadEvents();
+
+    function loadReadEvents() {
+      let raw = null;
+      try { raw = localStorage.getItem(READ_EVENTS_KEY); }
+      catch { storageAvailable = false; }
+      let saved = [];
+      try { saved = JSON.parse(raw || '[]'); }
+      catch { /* Ignore damaged saved data; the next exploration will replace it. */ }
+      return new Set(Array.isArray(saved) ? saved.filter(id => validEventIds.has(id)) : []);
+    }
+
+    function updateReadProgress() {
+      for (const event of events) {
+        const isRead = readEvents.has(event.id);
+        const button = eventButtons.get(event.id);
+        if (isRead) button.classList.add('is-read');
+        else button.classList.remove('is-read');
+        eventReadLabels.get(event.id).textContent = isRead ? '● 已探索' : '未探索';
+        button.setAttribute('aria-label', `${event.title}，${event.subtitle}，${isRead ? '已探索' : '未探索'}`);
+      }
+      document.getElementById('read-count').textContent = `已探索 ${readEvents.size} / ${events.length} 個事件`;
+      const progress = document.getElementById('read-progress');
+      progress.max = events.length;
+      progress.value = readEvents.size;
+      document.getElementById('reset-reading').disabled = readEvents.size === 0;
+      document.getElementById('storage-note').textContent = storageAvailable
+        ? '進度會儲存在此瀏覽器。'
+        : '此瀏覽器無法儲存進度；本次探索仍可正常使用。';
+    }
+
+    function setActiveChapter(chapterId) {
+      const chapter = chapters.find(item => item.id === chapterId);
+      if (!chapter) return;
+      for (const [year, link] of yearLinks) {
+        if (year === chapter.year) link.setAttribute('aria-current', 'location');
+        else link.removeAttribute('aria-current');
+      }
+      for (const [id, element] of chapterElements) {
+        if (id === chapterId) element.classList.add('is-current');
+        else element.classList.remove('is-current');
+      }
+      document.getElementById('current-chapter').textContent = `目前章節：${chapter.year} · ${chapter.title}`;
+    }
+
+    function renderChapters() {
+      const sections = chapters.map((chapter, chapterIndex) => {
+        const article = createTextElement('article', `chapter ${chapter.style}`, '');
+        article.id = chapter.anchor;
+        article.setAttribute('aria-labelledby', `chapter-title-${chapter.id}`);
+        const content = createTextElement('div', 'chapter-content', '');
+        const heading = createTextElement('h3', '', chapter.title);
+        heading.id = `chapter-title-${chapter.id}`;
+        content.append(createTextElement('p', 'eyebrow', chapter.label), heading, createTextElement('p', 'chapter-summary', chapter.intro));
+        const number = createTextElement('span', 'chapter-index', `0${chapterIndex + 1}`);
+        number.setAttribute('aria-hidden', 'true');
+        const list = createTextElement('div', 'event-list', '');
+        events.forEach((event, index) => {
+          if (event.chapter !== chapter.id) return;
+          const button = createTextElement('button', `event-node${event.highlight ? ' is-highlight' : ''}`, '');
+          button.type = 'button';
+          button.setAttribute('aria-haspopup', 'dialog');
+          button.setAttribute('aria-controls', 'event-dialog');
+          button.setAttribute('aria-expanded', 'false');
+          const meta = createTextElement('span', 'event-meta', '');
+          const readLabel = createTextElement('span', 'event-read-state', '未探索');
+          meta.append(createTextElement('span', '', event.dateLabel), readLabel);
+          button.append(meta, createTextElement('span', 'event-name', event.title), createTextElement('span', 'event-summary', event.summary), createTextElement('span', 'event-action', '閱讀故事 ↗'));
+          button.addEventListener('click', () => openEvent(index, button));
+          eventButtons.set(event.id, button);
+          eventReadLabels.set(event.id, readLabel);
+          list.append(button);
+        });
+        article.append(createTextElement('p', 'chapter-year', String(chapter.year)), content, number, list);
+        chapterElements.set(chapter.id, article);
+        return article;
+      });
+      document.getElementById('journey-chapters').replaceChildren(...sections);
+    }
+
+    function renderEvent(index) {
+      if (index < 0 || index >= events.length) return;
+      if (activeEventIndex >= 0) eventButtons.get(events[activeEventIndex].id).setAttribute('aria-expanded', 'false');
+      activeEventIndex = index;
+      const event = events[index];
+      const chapter = chapters.find(item => item.id === event.chapter);
+      document.getElementById('event-position').textContent = `THE ARCHIVE / ${index + 1} OF ${events.length}`;
+      document.getElementById('event-chapter').textContent = `${event.dateLabel} · ${chapter.title}`;
+      document.getElementById('event-title').textContent = event.title;
+      document.getElementById('event-subtitle').textContent = event.subtitle;
+      document.getElementById('event-story').textContent = event.story;
+      document.getElementById('event-tags').replaceChildren(...event.tags.map(tag => createTextElement('li', '', tag)));
+      const sourceLink = document.getElementById('event-source');
+      sourceLink.hidden = !event.sourceUrl;
+      if (event.sourceUrl) sourceLink.href = event.sourceUrl;
+      else sourceLink.removeAttribute('href');
+      previousEventButton.disabled = index === 0;
+      nextEventButton.disabled = index === events.length - 1;
+      eventButtons.get(event.id).setAttribute('aria-expanded', 'true');
+      setActiveChapter(event.chapter);
+      readEvents.add(event.id);
+      try { localStorage.setItem(READ_EVENTS_KEY, JSON.stringify([...readEvents])); storageAvailable = true; }
+      catch { storageAvailable = false; }
+      updateReadProgress();
+    }
+
+    function openEvent(index, trigger) {
+      if (eventDialog.open || playerDialog.open) return;
+      eventTrigger = trigger;
+      eventOriginChapter = events[index].chapter;
+      renderEvent(index);
+      eventDialog.showModal();
+      eventDialog.scrollTop = 0;
+      document.body.classList.add('dialog-open');
+      eventCloseButton.focus({ preventScroll: true });
+    }
+
+    function moveEvent(direction) {
+      const index = activeEventIndex + direction;
+      if (index < 0 || index >= events.length) return;
+      renderEvent(index);
+      eventDialog.scrollTop = 0;
+      document.getElementById('event-title').focus({ preventScroll: true });
+    }
+
+    previousEventButton.addEventListener('click', () => moveEvent(-1));
+    nextEventButton.addEventListener('click', () => moveEvent(1));
+    eventCloseButton.addEventListener('click', () => eventDialog.close());
+    eventDialog.addEventListener('pointerdown', event => { eventBackdropStarted = isBackdropPointer(event, eventDialog); });
+    eventDialog.addEventListener('pointercancel', () => { eventBackdropStarted = false; });
+    eventDialog.addEventListener('click', event => {
+      if (eventBackdropStarted && isBackdropPointer(event, eventDialog)) eventDialog.close();
+      eventBackdropStarted = false;
+    });
+    eventDialog.addEventListener('close', () => {
+      document.body.classList.remove('dialog-open');
+      eventBackdropStarted = false;
+      if (activeEventIndex >= 0) eventButtons.get(events[activeEventIndex].id).setAttribute('aria-expanded', 'false');
+      if (eventOriginChapter) setActiveChapter(eventOriginChapter);
+      if (eventTrigger && eventTrigger.isConnected) eventTrigger.focus({ preventScroll: true });
+    });
+    document.getElementById('reset-reading').addEventListener('click', () => {
+      readEvents.clear();
+      try { localStorage.removeItem(READ_EVENTS_KEY); storageAvailable = true; }
+      catch { storageAvailable = false; }
+      updateReadProgress();
+    });
+
+    function renderMatches() {
+      const cards = matches.map(match => {
+        const button = createTextElement('button', 'match-card', '');
+        button.type = 'button';
+        button.setAttribute('aria-label', `${match.year} ${match.tournament}，T1 對 ${match.opponent}，${match.score}，閱讀故事`);
+        button.setAttribute('aria-haspopup', 'dialog');
+        button.setAttribute('aria-controls', 'event-dialog');
+        const copy = createTextElement('span', 'match-copy', '');
+        copy.append(createTextElement('span', 'match-tournament', match.tournament), createTextElement('span', 'match-teams', `T1 vs ${match.opponent}`), createTextElement('span', 'match-caption', match.caption));
+        const score = createTextElement('span', 'match-score', '');
+        score.append(createTextElement('strong', '', match.score), createTextElement('small', '', '閱讀故事 ↗'));
+        button.append(createTextElement('span', 'match-year', String(match.year)), copy, score);
+        button.addEventListener('click', () => openEvent(events.findIndex(event => event.id === match.eventId), button));
+        return button;
+      });
+      document.getElementById('match-list').replaceChildren(...cards);
+    }
+
+    const BEST_QUIZ_KEY = 'zofgk_legacy_v1_best_quiz_score';
+    const quizState = { phase: 'intro', index: 0, score: 0, answered: false };
+    let quizStorageAvailable = true;
+    let bestQuizScore = loadBestQuizScore();
+    let quizOptionButtons = [];
+    const quizNextButton = document.getElementById('quiz-next');
+
+    function loadBestQuizScore() {
+      try {
+        const score = Number(localStorage.getItem(BEST_QUIZ_KEY));
+        return Number.isInteger(score) && score >= 0 && score <= 100 && score % 20 === 0 ? score : 0;
+      } catch {
+        quizStorageAvailable = false;
+        return 0;
+      }
+    }
+
+    function updateQuizRecord() {
+      document.getElementById('quiz-best-score').textContent = `最佳紀錄：${bestQuizScore} 分`;
+      document.getElementById('quiz-storage-note').textContent = quizStorageAvailable
+        ? '最高分儲存在此瀏覽器，不需帳號。'
+        : '此瀏覽器無法儲存最高分；你仍可完成測驗並重新挑戰。';
+    }
+
+    function updateQuizScreens() {
+      document.getElementById('quiz-intro').hidden = quizState.phase !== 'intro';
+      document.getElementById('quiz-play').hidden = quizState.phase !== 'question';
+      document.getElementById('quiz-result').hidden = quizState.phase !== 'finished';
+    }
+
+    function updateQuizStatus() {
+      document.getElementById('quiz-status').textContent = `第 ${quizState.index + 1} / ${questions.length} 題 · 目前 ${quizState.score} 分`;
+      document.getElementById('quiz-progress').value = quizState.index + (quizState.answered ? 1 : 0);
+    }
+
+    function renderQuizQuestion() {
+      quizState.answered = false;
+      const question = questions[quizState.index];
+      const heading = document.getElementById('quiz-question');
+      heading.textContent = question.prompt;
+      document.getElementById('quiz-feedback').textContent = '';
+      quizNextButton.hidden = true;
+      quizNextButton.disabled = true;
+      quizNextButton.textContent = quizState.index === questions.length - 1 ? '查看成績 →' : '下一題 →';
+      quizOptionButtons = question.options.map((option, index) => {
+        const button = createTextElement('button', 'quiz-option', '');
+        button.type = 'button';
+        const letter = String.fromCharCode(65 + index);
+        button.setAttribute('aria-label', `選項 ${letter}：${option}`);
+        const label = createTextElement('span', 'quiz-option-letter', letter);
+        label.setAttribute('aria-hidden', 'true');
+        button.append(label, createTextElement('span', 'quiz-option-text', option));
+        button.addEventListener('click', () => submitQuizAnswer(index));
+        return button;
+      });
+      document.getElementById('quiz-options').replaceChildren(...quizOptionButtons);
+      updateQuizStatus();
+      heading.focus();
+    }
+
+    function startQuiz() {
+      quizState.phase = 'question';
+      quizState.index = 0;
+      quizState.score = 0;
+      updateQuizScreens();
+      renderQuizQuestion();
+    }
+
+    function submitQuizAnswer(index) {
+      if (quizState.phase !== 'question' || quizState.answered || !Number.isInteger(index) || index < 0 || index >= 4) return;
+      quizState.answered = true;
+      const question = questions[quizState.index];
+      const correct = index === question.answer;
+      if (correct) quizState.score += 20;
+      quizOptionButtons.forEach((button, optionIndex) => {
+        button.disabled = true;
+        if (optionIndex === question.answer) {
+          button.classList.add('is-correct');
+          button.append(createTextElement('span', 'quiz-option-state', optionIndex === index ? '✓ 你的答案 · 正確' : '✓ 正確答案'));
+        } else if (optionIndex === index) {
+          button.classList.add('is-wrong');
+          button.append(createTextElement('span', 'quiz-option-state', '× 你的答案 · 不正確'));
+        }
+      });
+      document.getElementById('quiz-feedback').textContent = `${correct ? '答對了，獲得 20 分！' : '這題答錯了。'}你的答案：${question.options[index]}。正確答案：${question.options[question.answer]}。${question.explanation}`;
+      updateQuizStatus();
+      quizNextButton.hidden = false;
+      quizNextButton.disabled = false;
+      quizNextButton.focus();
+    }
+
+    function nextQuizQuestion() {
+      if (quizState.phase !== 'question' || !quizState.answered) return;
+      if (quizState.index < questions.length - 1) {
+        quizState.index += 1;
+        renderQuizQuestion();
+        return;
+      }
+      quizState.phase = 'finished';
+      bestQuizScore = Math.max(bestQuizScore, quizState.score);
+      try { localStorage.setItem(BEST_QUIZ_KEY, String(bestQuizScore)); quizStorageAvailable = true; }
+      catch { quizStorageAvailable = false; }
+      document.getElementById('quiz-final-score').textContent = `${quizState.score} / 100`;
+      document.getElementById('quiz-result-message').textContent = quizState.score === 100
+        ? '五段記憶，都留在你心裡。謝謝你走過這段五人的旅程。'
+        : quizState.score >= 60
+          ? '你已記住許多重要時刻。再回到故事裡，補上那些錯過的片刻。'
+          : '每次回望，都能多認識五人一些。帶著這些答案，再走一次他們的旅程。';
+      updateQuizRecord();
+      updateQuizScreens();
+      document.getElementById('quiz-result-title').focus();
+    }
+
+    document.getElementById('quiz-start').addEventListener('click', startQuiz);
+    document.getElementById('quiz-retry').addEventListener('click', startQuiz);
+    quizNextButton.addEventListener('click', nextQuizQuestion);
+
+    renderPlayers();
+    renderMatches();
+    updateQuizScreens();
+    updateQuizRecord();
+    renderChapters();
+    updateReadProgress();
+    setActiveChapter(chapters[0].id);
+    for (const [year, link] of yearLinks) {
+      link.addEventListener('click', () => setActiveChapter(chapters.find(chapter => chapter.year === year).id));
+    }
+    if (typeof IntersectionObserver !== 'undefined') {
+      const visibleChapters = new Map();
+      let chapterObserver;
+      const handleChapterEntries = entries => {
+        for (const entry of entries) {
+          if (entry.isIntersecting) {
+            visibleChapters.set(entry.target.id, entry.target);
+            entry.target.classList.add('chapter-entered');
+          } else visibleChapters.delete(entry.target.id);
+        }
+        if (eventDialog.open || !visibleChapters.size) return;
+        const latestVisible = [...visibleChapters.values()].sort((a, b) => b.getBoundingClientRect().top - a.getBoundingClientRect().top)[0];
+        setActiveChapter(chapters.find(chapter => chapter.anchor === latestVisible.id).id);
+      };
+      function observeChapters() {
+        if (chapterObserver) chapterObserver.disconnect();
+        visibleChapters.clear();
+        const height = window.innerHeight;
+        const fixedHeight = document.getElementById('site-header').getBoundingClientRect().height
+          + document.getElementById('year-navigation').getBoundingClientRect().height;
+        const top = Math.min(height - 2, Math.max(fixedHeight, Math.round(height * .3)));
+        const bottom = Math.max(0, Math.min(Math.round(height * .45), height - top - 2));
+        // Observer margin percentages use width; pixels preserve a visible band in wide viewports.
+        chapterObserver = new IntersectionObserver(handleChapterEntries, { rootMargin: `-${top}px 0px -${bottom}px 0px`, threshold: 0 });
+        for (const element of chapterElements.values()) chapterObserver.observe(element);
+      }
+      observeChapters();
+      window.addEventListener('resize', observeChapters);
+    }
+  </script>
+</body>
+</html>
